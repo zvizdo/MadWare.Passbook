@@ -16,7 +16,7 @@ namespace MadWare.Passbook.Tests
         {
             IPassSerializer s = new JsonPassSerializer();
 
-            var a = new NumberField("int", "Integer", 1, Enums.FieldNumberStyle.PKNumberStyleSpellOut);
+            var a = new IntegerField("int", "Integer", 1, Enums.FieldNumberStyle.PKNumberStyleSpellOut);
             a.DataDetectorTypes = new Enums.DataDetectorType[] { Enums.DataDetectorType.PKDataDetectorTypeAddress, Enums.DataDetectorType.PKDataDetectorTypeLink };
             Pass<GenericPassStyle> p = new Pass<GenericPassStyle>
             {

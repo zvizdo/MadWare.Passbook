@@ -12,16 +12,13 @@ namespace MadWare.Passbook.Fields
         /// <summary>
 		/// Required. The key must be unique within the scope of the entire pass. For example, “departure-gate”.
 		/// </summary>
-        [JsonProperty(PropertyName = "key")]
         public string Key { get; set; }
 
         /// <summary>
         /// Optional. Label text for the field.
         /// </summary>
-        [JsonProperty(PropertyName = "label")]
         public string Label { get; set; }
 
-        [JsonProperty(PropertyName = "value")]
         public string Value { get; protected set; }
 
         /// <summary>
@@ -30,7 +27,6 @@ namespace MadWare.Passbook.Fields
         /// <para>For example, "Gate changed to %@."</para>
         /// <para>If you don't specify a change message, the user isn't notified when the field changes.</para>
         /// </summary>
-        [JsonProperty(PropertyName = "changeMessage")]
         public string ChangeMessage { get; set; }
 
         /// <summary>
@@ -52,7 +48,6 @@ namespace MadWare.Passbook.Fields
         /// <para>The default value is natural alignment, which aligns the text appropriately based on its script direction.</para>
         /// <para>This key is not allowed for primary fields or back fields.</para>
         /// </summary>
-        [JsonProperty(PropertyName = "textAlignment")]
         [JsonConverter(typeof(StringEnumConverter))]
         public FieldTextAlignment? TextAlignment { get; set; }
 
@@ -63,7 +58,6 @@ namespace MadWare.Passbook.Fields
 		/// <para>This key's value overrides the text specified by the value key.</para>
 		/// <para>Available in iOS 7.0.</para>
 		/// </summary>
-        [JsonProperty(PropertyName = "attributedValue")]
         public string AttributedValue { get; set; }
 
         /// <summary>
@@ -85,8 +79,7 @@ namespace MadWare.Passbook.Fields
 		/// <para>The default value is all data detectors. Provide an empty array to use no data detectors.</para>
 		/// <para>Data detectors are applied only to back fields.</para>
 		/// </summary>
-        [JsonProperty(PropertyName = "dataDetectorTypes")]
-        //[JsonConverter(typeof(StringEnumConverter))]
+        [JsonProperty(PropertyName = "dataDetectorTypes", ItemConverterType = typeof(StringEnumConverter))]
         public DataDetectorType[] DataDetectorTypes { get; set; }
 
         public Field(string key, string label)

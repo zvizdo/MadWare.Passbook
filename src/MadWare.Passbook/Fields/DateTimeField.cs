@@ -23,14 +23,12 @@ namespace MadWare.Passbook.Fields
         /// <summary>
 		/// Style of date to display, must be a <see cref="FieldDateTimeStyle" />
 		/// </summary>
-        [JsonProperty(PropertyName = "dateStyle")]
         [JsonConverter(typeof(StringEnumConverter))]
         public FieldDateTimeStyle DateStyle { get; set; }
 
         /// <summary>
         /// Style of time to display, must be a <see cref="FieldDateTimeStyle" />
         /// </summary>
-        [JsonProperty(PropertyName = "timeStyle")]
         [JsonConverter(typeof(StringEnumConverter))]
         public FieldDateTimeStyle TimeStyle { get; set; }
 
@@ -38,7 +36,6 @@ namespace MadWare.Passbook.Fields
 		/// <para>Optional. If true, the label's value is displayed as a relative date; otherwise, it is displayed as an absolute date. The default value is false.</para>
 		/// <para>This does not affect how relevance is calculated.</para>
 		/// </summary>
-        [JsonProperty(PropertyName = "isRelative")]
         public bool? IsRelative { get; set; }
 
         /// <summary>
@@ -47,7 +44,6 @@ namespace MadWare.Passbook.Fields
         /// <para>This key does not affect how relevance is calculated.</para>
         /// <para>Available in iOS 7.0.</para>
         /// </summary>
-        [JsonProperty(PropertyName = "ignoresTimeZone")]
         public bool? IgnoresTimeZone { get; set; }
     }
 }

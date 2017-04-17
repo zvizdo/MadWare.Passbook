@@ -1,36 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 
 namespace MadWare.Passbook.Enums
 {
-    [Flags]
     public enum DataDetectorType
     {
         /// <summary>
-        /// Automatically detect any of the supported data types
-        /// </summary>
-        PKDataDetectorAll = 0,
-        /// <summary>
-        /// Do not detect any data types
-        /// </summary>
-        PKDataDetectorNone = 1,
-        /// <summary>
         /// Automatically detect phone numbers
         /// </summary>
-        PKDataDetectorTypePhoneNumber = 2,
+        PKDataDetectorTypePhoneNumber,
         /// <summary>
         /// Automatically detect links
         /// </summary>
-        PKDataDetectorTypeLink = 4,
+        PKDataDetectorTypeLink,
         /// <summary>
         /// Automatically detect addresses
         /// </summary>
-        PKDataDetectorTypeAddress = 8,
+        PKDataDetectorTypeAddress,
         /// <summary>
         /// Automatically detect calendar events
         /// </summary>
-        PKDataDetectorTypeCalendarEvent = 16
+        PKDataDetectorTypeCalendarEvent
     }
 }

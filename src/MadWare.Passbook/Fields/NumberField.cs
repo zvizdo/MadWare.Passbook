@@ -8,23 +8,6 @@ using System.Threading.Tasks;
 
 namespace MadWare.Passbook.Fields
 {
-    public class IntegerField : Field<int>
-    {
-        public IntegerField(string key, string label, int value) : base(key, label, value)
-        {
-        }
-
-        public IntegerField(string key, string label, int value, FieldNumberStyle numberStyle) : base(key, label, value)
-        {
-            //this.NumberStyle = numberStyle;
-        }
-
-        public override void SetValue(int value)
-        {
-            this.Value = value.ToString();
-        }
-    }
-
     public class NumberField : Field<double>
     {
         public NumberField(string key, string label, double value) : base(key, label, value)
@@ -39,15 +22,29 @@ namespace MadWare.Passbook.Fields
         /// <summary>
 		/// ISO 4217 currency code for the field’s value.
 		/// </summary>
-        [JsonProperty(PropertyName = "currencyCode")]
         public string CurrencyCode { get; set; }
 
         /// <summary>
         /// Style of number to display. Must be one of <see cref="FieldNumberStyle" />
         /// </summary>
-        [JsonProperty(PropertyName = "numberStyle")]
         [JsonConverter(typeof(StringEnumConverter))]
         public FieldNumberStyle? NumberStyle { get; set; }
 
+    }
+
+    public class IntegerField : NumberField
+    {
+        public IntegerField(string key, string label, int value) : base(key, label, value)
+        {
+        }
+
+        public IntegerField(string key, string label, int value, FieldNumberStyle numberStyle) : base(key, label, value, numberStyle)
+        {
+        }
+
+        public override void SetValue(double value)
+        {
+            this.Value = ((int)value).ToString();
+        }
     }
 }
