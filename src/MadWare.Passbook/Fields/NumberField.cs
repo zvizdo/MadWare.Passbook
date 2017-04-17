@@ -14,6 +14,11 @@ namespace MadWare.Passbook.Fields
         {
         }
 
+        public IntegerField(string key, string label, int value, FieldNumberStyle numberStyle) : base(key, label, value)
+        {
+            //this.NumberStyle = numberStyle;
+        }
+
         public override void SetValue(int value)
         {
             this.Value = value.ToString();

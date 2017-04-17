@@ -13,7 +13,7 @@ namespace MadWare.Passbook.Tests
         [Fact]
         public void Test1()
         {
-            var sigener = new BouncyCastleSiger();
+            var sigener = new BouncyCastlePassSiger();
             byte[] TEST = Encoding.UTF8.GetBytes("abc");
             
             string path = typeof(UnitTest1).GetTypeInfo().Assembly.Location;

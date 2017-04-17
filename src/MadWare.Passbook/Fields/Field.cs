@@ -86,8 +86,8 @@ namespace MadWare.Passbook.Fields
 		/// <para>Data detectors are applied only to back fields.</para>
 		/// </summary>
         [JsonProperty(PropertyName = "dataDetectorTypes")]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public DataDetectorType[] DataDetectorTypes { get; internal set; }
+        //[JsonConverter(typeof(StringEnumConverter))]
+        public DataDetectorType[] DataDetectorTypes { get; set; }
 
         public Field(string key, string label)
         {
