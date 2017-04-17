@@ -1,6 +1,7 @@
 ﻿using MadWare.Passbook.PassSerializer;
 using MadWare.Passbook.PassSigner;
 using MadWare.Passbook.PassStyle;
+using System.Text;
 
 namespace MadWare.Passbook
 {
@@ -23,5 +24,7 @@ namespace MadWare.Passbook
         {
             return null;
         }
+
+        
     }
 }

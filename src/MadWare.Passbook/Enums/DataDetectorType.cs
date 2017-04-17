@@ -33,3 +33,4 @@ namespace MadWare.Passbook.Enums
         /// </summary>
         PKDataDetectorTypeCalendarEvent = 16
     }
+}
