@@ -1,4 +1,7 @@
-﻿using MadWare.Passbook.PassStyle;
+﻿using MadWare.Passbook.Enums;
+using MadWare.Passbook.PassStyle;
+using MadWare.Passbook.SpecialFields;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 
@@ -88,6 +91,13 @@ namespace MadWare.Passbook
 
         #endregion Visual Appearance Keys
 
+        #region Images Files
+
+        [JsonIgnore]
+        public Dictionary<PassbookImageType, byte[]> Images { get; set; }
+
+        #endregion
+
         #region Relevance Keys
 
         /// <summary>
@@ -103,12 +113,12 @@ namespace MadWare.Passbook
         /// <summary>
         /// Optional. Locations where the passisrelevant. For example, the location of your store.
         /// </summary>
-        //public List<RelevantLocation> RelevantLocations { get; private set; }
+        public List<Location> Locations { get; set; }
 
         /// <summary>
         /// Optional. Beacons marking locations where the pass is relevant.
         /// </summary>
-        //public List<RelevantBeacon> RelevantBeacons { get; private set; }
+        public List<Beacon> Beacons { get; set; }
 
         /// <summary>
         /// Optional. Maximum distance in meters from a relevant latitude and longitude that the pass is relevant
@@ -141,10 +151,45 @@ namespace MadWare.Passbook
 
         #endregion Associated App Keys
 
+        #region Localization
+
+        [JsonIgnore]
+        public Dictionary<string, Localization> Localizations { get; set; }
+
+        #endregion
+
         #region User Info Keys
 
         public Object UserInfo { get; set; }
 
         #endregion User Info Keys
+
+        public void AddImage(PassbookImageType imageType, byte[] imageBytes)
+        {
+            if (this.Images == null)
+                this.Images = new Dictionary<PassbookImageType, byte[]>();
+
+            if (this.Images.ContainsKey(imageType))
+            {
+                this.Images[imageType] = imageBytes;
+            }
+            else
+            {
+                this.Images.Add(imageType, imageBytes);
+            }
+        }
+
+        public void AddLocalization(Localization loc)
+        {
+            if (this.Localizations == null)
+                this.Localizations = new Dictionary<string, Localization>();
+
+            if (this.Localizations.ContainsKey(loc.Language))
+                this.Localizations[loc.Language] = loc;
+            else
+                this.Localizations.Add(loc.Language, loc);
+
+        }
+
     }
 }

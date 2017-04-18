@@ -18,13 +18,15 @@ namespace MadWare.Passbook.Tests
 
             var a = new IntegerField("int", "Integer", 1, Enums.FieldNumberStyle.PKNumberStyleSpellOut);
             a.DataDetectorTypes = new Enums.DataDetectorType[] { Enums.DataDetectorType.PKDataDetectorTypeAddress, Enums.DataDetectorType.PKDataDetectorTypeLink };
-            Pass<GenericPassStyle> p = new Pass<GenericPassStyle>
+            var p = new Pass<BoardingPassStyle>
             {
                 TeamIdentifier = "123",
-                PassStyle = new GenericPassStyle()
+                PassStyle = new BoardingPassStyle(Enums.TransitType.PKTransitTypeAir)
                 {
                     HeaderFields = new List<Fields.Field> { a }
-                }
+                },
+                Locations = new List<SpecialFields.Location> { new SpecialFields.Location(1, 2, relevantText: "abc") },
+                Localizations = new Dictionary<string, SpecialFields.Localization> {  }
             };
 
             byte[] passJsonBytes = s.Serialize(p);

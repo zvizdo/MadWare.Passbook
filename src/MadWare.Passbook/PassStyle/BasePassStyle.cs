@@ -1,4 +1,5 @@
 ﻿using MadWare.Passbook.Fields;
+using MadWare.Passbook.SpecialFields;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,15 +37,10 @@ namespace MadWare.Passbook.PassStyle
         /// <summary>
         /// Optional. Information specific to barcodes.
         /// </summary>
-        //public Barcode Barcode { get; protected set; }
+        public Barcode Barcode { get; protected set; }
 
         public BasePassStyle()
         {
-            /*this.HeaderFields = new List<Field>();
-            this.PrimaryFields = new List<Field>();
-            this.SecondaryFields = new List<Field>();
-            this.AuxiliaryFields = new List<Field>();
-            this.BackFields = new List<Field>();*/
         }
     }
 }
