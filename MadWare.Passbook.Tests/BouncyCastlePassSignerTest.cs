@@ -1,4 +1,4 @@
-#if NETCOREAPP1_1
+#if NETCOREAPP1_0
 
 using MadWare.Passbook.PassSigner;
 using System;
@@ -20,7 +20,7 @@ namespace MadWare.Passbook.Tests
             
             string path = typeof(BouncyCastlePassSignerTest).GetTypeInfo().Assembly.Location;
             var cwd = new FileInfo(path);
-            path = cwd.Directory.FullName;
+            path = cwd.Directory.Parent.Parent.Parent.FullName;
 
             var pass = Helpers.LoadCertificateFromBytes(File.ReadAllBytes(path + "\\resources\\pass.com.eon4u.p12"), "eon4u");
             var apple = Helpers.LoadCertificateFromBytes(File.ReadAllBytes(path + "\\resources\\AppleWWDRCA.cer"));

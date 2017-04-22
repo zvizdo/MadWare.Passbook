@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net46</TargetFrameworks>
+    <TargetFrameworks>netstandard16</TargetFrameworks>
 
     <AssemblyName>MadWare.Passbook</AssemblyName>
     <PackageId>MadWare.Passbook</PackageId>
@@ -12,11 +12,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="BouncyCastle.NetCore" Version="1.8.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System.Security" />
   </ItemGroup>
 
 </Project>
