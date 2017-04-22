@@ -8,7 +8,7 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace MadWare.Passbook.Tests
 {
-    public class UnitTest1
+    public class PassSignerTest
     {
         [Fact]
         public void Test1()
