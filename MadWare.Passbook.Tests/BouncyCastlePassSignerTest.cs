@@ -1,4 +1,4 @@
-#if NETCOREAPP1_1
+#if NETCOREAPP1_0
 
 using MadWare.Passbook.PassSigner;
 using System;
