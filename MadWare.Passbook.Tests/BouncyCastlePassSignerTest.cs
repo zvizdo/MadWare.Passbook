@@ -1,3 +1,5 @@
+#if NETCOREAPP1_1
+
 using MadWare.Passbook.PassSigner;
 using System;
 using System.IO;
@@ -28,3 +30,5 @@ namespace MadWare.Passbook.Tests
         }
     }
 }
+
+# endif

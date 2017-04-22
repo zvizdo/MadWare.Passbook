@@ -1,3 +1,5 @@
+#if NET46
+
 using MadWare.Passbook.PassSigner;
 using System;
 using System.IO;
@@ -11,7 +13,7 @@ namespace MadWare.Passbook.Tests
     public class NetFrameworkPassSignerTests
     {
         [Fact]
-        public void Test1()
+        public void BasicSign()
         {
             var signer = new NetFrameworkPassSigner();
             byte[] testPass = Encoding.UTF8.GetBytes("{}");
@@ -29,3 +31,5 @@ namespace MadWare.Passbook.Tests
         }
     }
 }
+
+# endif
