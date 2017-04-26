@@ -8,7 +8,7 @@ namespace MadWare.Passbook
 {
     public class PassGeneratorOptions
     {
-        private X509Certificate2 AppleCert { get; set; }
-        private X509Certificate2 PassCert { get; set; }
+        public X509Certificate2 AppleCert { get; set; }
+        public X509Certificate2 PassCert { get; set; }
     }
 }

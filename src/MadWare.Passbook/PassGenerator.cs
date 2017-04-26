@@ -19,7 +19,7 @@ namespace MadWare.Passbook
 
         protected IPassSerializer passSerializer;
 
-        protected NetFrameworkPassSigner passSigner;
+        protected IPassSigner passSigner;
 
         private Dictionary<string, byte[]> localizationFiles = null;
         private byte[] manifestFile = null;
@@ -27,26 +27,28 @@ namespace MadWare.Passbook
         private byte[] pkPassFile = null;
         private byte[] signatureFile = null;
 
-        public PassGenerator(PassGeneratorOptions opt, IPassSerializer passSerializer, NetFrameworkPassSigner passSigner)
+        public PassGenerator(PassGeneratorOptions opt, IPassSerializer passSerializer, IPassSigner passSigner)
         {
             this.passOptions = opt;
             this.passSerializer = passSerializer;
             this.passSigner = passSigner;
         }
 
+        public PassGenerator(PassGeneratorOptions opt) : this(opt, new JsonPassSerializer(), new NetFrameworkPassSigner())
+        {
+        }
+
         public byte[] Generate<T>(Pass<T> p) where T : BasePassStyle
         {
-
             if (p == null)
-            {
-                throw new ArgumentNullException("request", "You must pass an instance of PassGeneratorRequest");
-            }
+                throw new ArgumentNullException("p", "You must pass an instance of Pass<T>");
+
+            this.passSigner.ValidateCertificate(this.passOptions.PassCert, p);
 
             CreatePackage(p);
             ZipPackage(p);
 
             return pkPassFile;
-
         }
 
         private void CreatePackage<T>(Pass<T> p) where T : BasePassStyle
@@ -60,15 +62,17 @@ namespace MadWare.Passbook
         {
             localizationFiles = new Dictionary<string, byte[]>(StringComparer.OrdinalIgnoreCase);
 
-            foreach (KeyValuePair<string, Localization> location in p.Localizations)
+            if (p.Localizations == null) return;
+
+            foreach (KeyValuePair<string, Localization> locale in p.Localizations)
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
                     using (StreamWriter sr = new StreamWriter(ms, Encoding.UTF8))
                     {
-                        sr.WriteLine("\"{0}\" = \"{1}\";\n", location.Key, location.Value);
+                        sr.WriteLine("\"{0}\" = \"{1}\";\n", locale.Key, locale.Value);
                         sr.Flush();
-                        localizationFiles.Add(location.Key, ms.ToArray());
+                        localizationFiles.Add(locale.Key, ms.ToArray());
                     }
                 }
             }
@@ -92,11 +96,14 @@ namespace MadWare.Passbook
                         jsonWriter.WritePropertyName(@"pass.json");
                         jsonWriter.WriteValue(hash);
 
-                        foreach (KeyValuePair<PassbookImageType, byte[]> image in p.Images)
+                        if (p.Images != null)
                         {
-                            hash = GetHashForBytes(image.Value);
-                            jsonWriter.WritePropertyName(image.Key.ToString());
-                            jsonWriter.WriteValue(hash);
+                            foreach (KeyValuePair<PassbookImageType, byte[]> image in p.Images)
+                            {
+                                hash = GetHashForBytes(image.Value);
+                                jsonWriter.WritePropertyName(image.Key.ToString());
+                                jsonWriter.WriteValue(hash);
+                            }
                         }
 
                         foreach (KeyValuePair<string, byte[]> localization in localizationFiles)
@@ -109,7 +116,7 @@ namespace MadWare.Passbook
 
                     manifestFile = ms.ToArray();
                 }
-                this.signatureFile = passSigner.Sign(manifestFile, null, null);
+                this.signatureFile = passSigner.Sign(manifestFile, this.passOptions.PassCert, this.passOptions.AppleCert);
 
             }
         }
@@ -129,14 +136,17 @@ namespace MadWare.Passbook
                 {
                     using (ZipArchive archive = new ZipArchive(zipToOpen, ZipArchiveMode.Update, true))
                     {
-                        foreach (KeyValuePair<PassbookImageType, byte[]> image in p.Images)
+                        if (p.Images != null)
                         {
-                            ZipArchiveEntry imageEntry = archive.CreateEntry(image.Key.ToString()); // File name
-
-                            using (BinaryWriter writer = new BinaryWriter(imageEntry.Open()))
+                            foreach (KeyValuePair<PassbookImageType, byte[]> image in p.Images)
                             {
-                                writer.Write(image.Value);
-                                writer.Flush();
+                                ZipArchiveEntry imageEntry = archive.CreateEntry(image.Key.ToString()); // File name
+
+                                using (BinaryWriter writer = new BinaryWriter(imageEntry.Open()))
+                                {
+                                    writer.Write(image.Value);
+                                    writer.Flush();
+                                }
                             }
                         }
 
