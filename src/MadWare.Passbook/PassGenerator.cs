@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using MadWare.Passbook.Enums;
 using Newtonsoft.Json;
 using System.IO.Compression;
+using MadWare.Passbook.Extensions;
 
 namespace MadWare.Passbook
 {
@@ -101,7 +102,7 @@ namespace MadWare.Passbook
                             foreach (KeyValuePair<PassbookImageType, byte[]> image in p.Images)
                             {
                                 hash = GetHashForBytes(image.Value);
-                                jsonWriter.WritePropertyName(image.Key.ToString());
+                                jsonWriter.WritePropertyName(image.Key.ToFilename());
                                 jsonWriter.WriteValue(hash);
                             }
                         }
@@ -140,7 +141,7 @@ namespace MadWare.Passbook
                         {
                             foreach (KeyValuePair<PassbookImageType, byte[]> image in p.Images)
                             {
-                                ZipArchiveEntry imageEntry = archive.CreateEntry(image.Key.ToString()); // File name
+                                ZipArchiveEntry imageEntry = archive.CreateEntry(image.Key.ToFilename()); // File name
 
                                 using (BinaryWriter writer = new BinaryWriter(imageEntry.Open()))
                                 {
