@@ -1,9 +1,11 @@
 ﻿using MadWare.Passbook.Enums;
 using MadWare.Passbook.PassStyle;
 using MadWare.Passbook.SpecialFields;
+using MadWare.Passbook.Validation;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MadWare.Passbook
 {
@@ -24,11 +26,13 @@ namespace MadWare.Passbook
         /// <summary>
         /// Required. Serial number that uniquely identifies the pass. No two passes with the same pass type identifier may have the same serial number.
         /// </summary>
+        [Required]
         public string SerialNumber { get; set; }
 
         /// <summary>
         /// Required. A simple description of the pass
         /// </summary>
+        [Required]
         public string Description { get; set; }
 
         /// <summary>
@@ -39,6 +43,7 @@ namespace MadWare.Passbook
         /// <summary>
         /// Required. Display name of the organization that originated and signed the pass.
         /// </summary>
+        [Required]
         public string OrganizationName { get; set; }
 
         #endregion Standard Keys
@@ -94,6 +99,7 @@ namespace MadWare.Passbook
         #region Images Files
 
         [JsonIgnore]
+        [ImagesValidation]
         public Dictionary<PassbookImageType, byte[]> Images { get; set; }
 
         #endregion
