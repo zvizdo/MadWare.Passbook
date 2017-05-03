@@ -1,6 +1,7 @@
 ﻿using MadWare.Passbook.Enums;
 using MadWare.Passbook.PassStyle;
 using MadWare.Passbook.SpecialFields;
+using MadWare.Passbook.Template;
 using MadWare.Passbook.Validation;
 using Newtonsoft.Json;
 using System;
@@ -100,7 +101,7 @@ namespace MadWare.Passbook
 
         [JsonIgnore]
         [ImagesValidation]
-        public Dictionary<PassbookImageType, byte[]> Images { get; set; }
+        public SerializableDictionary<PassbookImageType, byte[]> Images { get; set; }        
 
         #endregion
 
@@ -160,7 +161,7 @@ namespace MadWare.Passbook
         #region Localization
 
         [JsonIgnore]
-        public Dictionary<string, Localization> Localizations { get; set; }
+        public SerializableDictionary<string, Localization> Localizations { get; set; }
 
         #endregion
 
@@ -173,7 +174,7 @@ namespace MadWare.Passbook
         public void AddImage(PassbookImageType imageType, byte[] imageBytes)
         {
             if (this.Images == null)
-                this.Images = new Dictionary<PassbookImageType, byte[]>();
+                this.Images = new SerializableDictionary<PassbookImageType, byte[]>();
 
             if (this.Images.ContainsKey(imageType))
             {
@@ -188,7 +189,7 @@ namespace MadWare.Passbook
         public void AddLocalization(Localization loc)
         {
             if (this.Localizations == null)
-                this.Localizations = new Dictionary<string, Localization>();
+                this.Localizations = new SerializableDictionary<string, Localization>();
 
             if (this.Localizations.ContainsKey(loc.Language))
                 this.Localizations[loc.Language] = loc;

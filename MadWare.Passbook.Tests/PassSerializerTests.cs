@@ -26,7 +26,7 @@ namespace MadWare.Passbook.Tests
                     HeaderFields = new List<Fields.Field> { a }
                 },
                 Locations = new List<SpecialFields.Location> { new SpecialFields.Location(1, 2, relevantText: "abc") },
-                Localizations = new Dictionary<string, SpecialFields.Localization> {  }
+                //Localizations = new Dictionary<string, SpecialFields.Localization> {  }
             };
 
             byte[] passJsonBytes = s.Serialize(p);

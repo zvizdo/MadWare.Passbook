@@ -1,12 +1,16 @@
 ﻿using MadWare.Passbook.Enums;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.Xml.Serialization;
 
 namespace MadWare.Passbook.Fields
 {
     /// <summary>
     /// https://developer.apple.com/library/content/documentation/UserExperience/Reference/PassKit_Bundle/Chapters/FieldDictionary.html
     /// </summary>
+    [XmlInclude(typeof(DateTimeField))]
+    [XmlInclude(typeof(NumberField))]
+    [XmlInclude(typeof(StandardField))]
     public abstract class Field
     {
         /// <summary>
@@ -19,7 +23,7 @@ namespace MadWare.Passbook.Fields
         /// </summary>
         public string Label { get; set; }
 
-        public string Value { get; protected set; }
+        public string Value { get; set; }
 
         /// <summary>
         /// <para>Optional. Format string for the alert text that is displayed when the pass is updated.</para>
@@ -82,7 +86,9 @@ namespace MadWare.Passbook.Fields
         [JsonProperty(PropertyName = "dataDetectorTypes", ItemConverterType = typeof(StringEnumConverter))]
         public DataDetectorType[] DataDetectorTypes { get; set; }
 
-        public Field(string key, string label)
+        public Field() { }
+
+        public Field(string key, string label): this()
         {
             this.Key = key;
             this.Label = label;
@@ -91,6 +97,8 @@ namespace MadWare.Passbook.Fields
 
     public class Field<T> : Field
     {
+        public Field(): base() { }
+        
         public Field(string key, string label, T value) : base(key, label)
         {
             this.SetValue(value);

@@ -5,11 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace MadWare.Passbook.Fields
 {
     public class NumberField : Field<double>
     {
+        public NumberField() : base() { }
+
         public NumberField(string key, string label, double value) : base(key, label, value)
         {
         }
