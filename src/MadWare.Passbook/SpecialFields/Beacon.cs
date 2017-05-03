@@ -20,6 +20,8 @@ namespace MadWare.Passbook.SpecialFields
 
         public int? Minor { get; set; }
 
+        public Beacon() { }
+
         public Beacon(string proximityUUID, string relevantText = null, int? major = null, int? minor = null)
         {
             this.ProximityUUID = proximityUUID;

@@ -2,6 +2,7 @@
 using MadWare.Passbook.PassSerializer;
 using MadWare.Passbook.PassSigner;
 using MadWare.Passbook.PassStyle;
+using MadWare.Passbook.Template;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,7 +26,7 @@ namespace MadWare.Passbook.Tests
             var cwd = new DirectoryInfo(path).Parent.Parent.Parent;
             path = cwd.FullName;
 
-            var images = new Dictionary<Enums.PassbookImageType, byte[]>();
+            var images = new SerializableDictionary<Enums.PassbookImageType, byte[]>();
             images.Add(Enums.PassbookImageType.Icon, File.ReadAllBytes(path + "\\resources\\eon4u-logo.png"));
             images.Add(Enums.PassbookImageType.IconRetina, File.ReadAllBytes(path + "\\resources\\eon4u-logo.png"));
             images.Add(Enums.PassbookImageType.LogoRetina, File.ReadAllBytes(path + "\\resources\\eon4u-logo.png"));
@@ -49,10 +50,6 @@ namespace MadWare.Passbook.Tests
 
                 },
                 Images = images,
-                
-                
-                   
-
             };
 
 

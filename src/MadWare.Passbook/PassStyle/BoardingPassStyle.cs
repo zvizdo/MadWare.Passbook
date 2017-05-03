@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace MadWare.Passbook.PassStyle
 {
+  
     public class BoardingPassStyle : BasePassStyle
     {
         /// <summary>
@@ -15,6 +17,8 @@ namespace MadWare.Passbook.PassStyle
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
         public TransitType TransitType { get; set; }
+
+        public BoardingPassStyle() : this(TransitType.PKTransitTypeAir) { }
 
         public BoardingPassStyle(TransitType transitType) : base()
         {

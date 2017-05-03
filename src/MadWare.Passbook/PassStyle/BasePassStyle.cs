@@ -3,15 +3,25 @@ using MadWare.Passbook.SpecialFields;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace MadWare.Passbook.PassStyle
 {
+    [XmlInclude(typeof(StoreCardPassStyle))]
+    [XmlInclude(typeof(GenericPassStyle))]
+    [XmlInclude(typeof(BoardingPassStyle))]
+    [XmlInclude(typeof(EventTicketPassStyle))]
+    [XmlInclude(typeof(CouponPassStyle))]
+    [XmlType(AnonymousType = true)]
+    [XmlRoot(Namespace = "", IsNullable = true)]
     public abstract class BasePassStyle
     {
         /// <summary>
         /// Optional. Fields to be displayed prominently on the front of the pass.
         /// </summary>
+        [XmlArray(Namespace = "HeaderFields", IsNullable = true)]
         public List<Field> HeaderFields { get; set; }
 
         /// <summary>
@@ -37,10 +47,12 @@ namespace MadWare.Passbook.PassStyle
         /// <summary>
         /// Optional. Information specific to barcodes.
         /// </summary>
-        public Barcode Barcode { get; protected set; }
+        public Barcode Barcode { get; set; }
 
         public BasePassStyle()
         {
         }
+
+   
     }
 }

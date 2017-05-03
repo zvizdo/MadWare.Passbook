@@ -26,6 +26,8 @@ namespace MadWare.Passbook.SpecialFields
         /// </summary>
         public string RelevantText { get; set; }
 
+        public Location() { }
+
         public Location(double lat, double lon, string relevantText = null, double? alt = null)
         {
             this.Latitude = lat;

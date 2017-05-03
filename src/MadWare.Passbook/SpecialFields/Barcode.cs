@@ -27,6 +27,10 @@ namespace MadWare.Passbook.SpecialFields
         /// </summary>
         public string AlternateText { get; set; }
 
+        public Barcode() : this(BarcodeType.PKBarcodeFormatQR, null, "ISO-8859-1")
+        {
+        }
+
         public Barcode(BarcodeType type, string message, string encoding)
         {
             Type = type;
