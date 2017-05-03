@@ -68,5 +68,11 @@ namespace MadWare.Passbook.Template
             }
         }
         #endregion
+
+        public SerializableDictionary<TKey, TValue> FluidAdd(TKey key, TValue value)
+        {
+            this.Add(key, value);
+            return this;
+        }
     }
 }

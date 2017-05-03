@@ -32,13 +32,12 @@ namespace MadWare.Passbook.Tests
                          ForegroundColor = "rgb(255,255,255)",
                          PassStyle = new StoreCardPassStyle
                          {
-                         PrimaryFields = new List<Field>
-                         {
-                            new StandardField("name", "Anže", "Kravanja")
-                         }
-
-                },
-                    Images = null,
+                             PrimaryFields = new List<Field>
+                             {
+                                new StandardField("name", "Anže", "Kravanja")
+                             }
+                        },
+                        Images = null,
                     },
                     true
                 },
@@ -47,19 +46,21 @@ namespace MadWare.Passbook.Tests
                          SerialNumber = "123456789",
                          Description = "test",
                          OrganizationName = "Test",
-                         BackgroundColor = Utils.ToColor(101,51,113),
-                         LabelColor = Utils.ToColor(101,51,113),
-                         ForegroundColor = Utils.ToColor(255,255,255),
+                         BackgroundColor = Utils.ToPassColorFormat(101,51,113),
+                         LabelColor = Utils.ToPassColorFormat(101,51,113),
+                         ForegroundColor = Utils.ToPassColorFormat(255,255,255),
                          PassStyle = new StoreCardPassStyle
                          {
-                         PrimaryFields = new List<Field>
-                         {
-                            new StandardField("name", "Anže", "Kravanja")
-                         }
-
-                },
-                    Images = new Dictionary<Enums.PassbookImageType, byte[]>{ { Enums.PassbookImageType.Icon, null }, { Enums.PassbookImageType.IconRetina, null }  },
-                    },
+                             PrimaryFields = new List<Field>
+                             {
+                                new StandardField("name", "Anže", "Kravanja")
+                             }
+                        },
+                    Images = new Template.SerializableDictionary<Enums.PassbookImageType, byte[]>()
+                             .FluidAdd(Enums.PassbookImageType.Icon, null)
+                             .FluidAdd(Enums.PassbookImageType.IconRetina, null)
+                    }
+                     ,
                     false
                 },
                   new object[] {
@@ -70,17 +71,15 @@ namespace MadWare.Passbook.Tests
                          BackgroundColor = "rgb(101,51,113)",
                          LabelColor = "rgb(255,255,255)",
                          ForegroundColor = "rgb(255,255,255)",
-                         PassStyle = new StoreCardPassStyle
-                         {
-                         PrimaryFields = new List<Field>
-                         {
+                         PassStyle = new StoreCardPassStyle {
+                            PrimaryFields = new List<Field>
+                            {
                             new StandardField("name", "Anže", "Kravanja")
-                         }
-
-                },
-                    Images = new Dictionary<Enums.PassbookImageType, byte[]>{ { Enums.PassbookImageType.Icon, null } },
-                    },
-                    true
+                            }
+                        },
+                        Images = new Template.SerializableDictionary<Enums.PassbookImageType, byte[]>().FluidAdd(Enums.PassbookImageType.Icon, null),
+                     },
+                       true
                 },
                   new object[] {
                     new  Pass<StoreCardPassStyle> {
@@ -90,17 +89,15 @@ namespace MadWare.Passbook.Tests
                          BackgroundColor = "rgb(101,51,113)",
                          LabelColor = "rgb(255,255,255)",
                          ForegroundColor = "rgb(255,255,255)",
-                         PassStyle = new StoreCardPassStyle
-                         {
-                         PrimaryFields = new List<Field>
-                         {
-                            new StandardField("name", "Anže", "Kravanja")
-                         }
-
-                },
-                    Images = new Dictionary<Enums.PassbookImageType, byte[]>{ { Enums.PassbookImageType.IconRetina, null } },
-                    },
-                    true
+                         PassStyle = new StoreCardPassStyle {
+                             PrimaryFields = new List<Field>
+                             {
+                                new StandardField("name", "Anže", "Kravanja")
+                             }
+                        },
+                        Images = new Template.SerializableDictionary<Enums.PassbookImageType, byte[]>().FluidAdd(Enums.PassbookImageType.IconRetina, null),
+                        },
+                        true
                 }
 
             };
