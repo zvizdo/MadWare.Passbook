@@ -96,9 +96,14 @@ namespace MadWare.Passbook
         public T PassStyle { get; set; }
 
         /// <summary>
-        /// Optional. Information specific to barcodes.
+        /// Optional. Information specific to barcode. Legacy.
         /// </summary>
         public Barcode Barcode { get; set; }
+
+        /// <summary>
+        /// Optional. Information specific to barcodes.
+        /// </summary>
+        public List<Barcode> Barcodes { get; set; }
 
         #endregion Visual Appearance Keys
 

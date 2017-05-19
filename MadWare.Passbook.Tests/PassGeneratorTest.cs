@@ -94,7 +94,11 @@ namespace MadWare.Passbook.Tests
                             new StandardField("name", "A", "K")
                         }
                 },
-                Barcode = new Barcode(BarcodeType.PKBarcodeFormatQR, "C03FC299-9D27-47EC-A30C-FA8A0A595C09", "ISO-8859-1", "TO JE TEXT OD SPODAJ"),
+                //Barcode = new Barcode(BarcodeType.PKBarcodeFormatQR, "C03FC299-9D27-47EC-A30C-FA8A0A595C09", "ISO-8859-1", "TO JE TEXT OD SPODAJ"),
+                Barcodes = new List<Barcode>
+                {
+                    new Barcode(BarcodeType.PKBarcodeFormatQR, "C03FC299-9D27-47EC-A30C-FA8A0A595C09", "ISO-8859-1")
+                },
                 Images = images,
 
             };
