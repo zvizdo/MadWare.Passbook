@@ -1,4 +1,6 @@
 ﻿using MadWare.Passbook.Enums;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +12,7 @@ namespace MadWare.Passbook.SpecialFields
         /// <summary>
         /// Required. Barcode format
         /// </summary>
+        [JsonConverter(typeof(StringEnumConverter))]
         public BarcodeType Type { get; set; }
 
         /// <summary>
