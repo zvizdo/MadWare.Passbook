@@ -44,11 +44,6 @@ namespace MadWare.Passbook.PassStyle
         /// </summary>
         public List<Field> BackFields { get; set; }
 
-        /// <summary>
-        /// Optional. Information specific to barcodes.
-        /// </summary>
-        public Barcode Barcode { get; set; }
-
         public BasePassStyle()
         {
         }
