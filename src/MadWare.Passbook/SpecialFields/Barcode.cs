@@ -13,7 +13,7 @@ namespace MadWare.Passbook.SpecialFields
         /// Required. Barcode format
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter))]
-        public BarcodeType Type { get; set; }
+        public BarcodeType Format { get; set; }
 
         /// <summary>
         /// Required. Message or payload to be displayed as a barcode.
