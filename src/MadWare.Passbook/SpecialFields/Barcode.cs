@@ -36,14 +36,14 @@ namespace MadWare.Passbook.SpecialFields
 
         public Barcode(BarcodeType type, string message, string encoding)
         {
-            Type = type;
+            Format = type;
             Message = message;
             Encoding = encoding;
         }
 
         public Barcode(BarcodeType type, string message, string encoding, string alternateText)
         {
-            Type = type;
+            Format = type;
             Message = message;
             Encoding = encoding;
             AlternateText = alternateText;
